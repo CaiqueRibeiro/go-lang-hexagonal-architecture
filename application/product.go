@@ -58,27 +58,26 @@ func NewProduct() *Product {
 		ID:     uuid.NewV4().String(),
 		Status: DISABLED,
 	}
-
 	return &product
 }
+
 func (p *Product) IsValid() (bool, error) {
 	if p.Status == "" {
 		p.Status = DISABLED
 	}
 
 	if p.Status != ENABLED && p.Status != DISABLED {
-		return false, errors.New("status must be enabled or disabled")
+		return false, errors.New("the status must be enabled or disabled")
 	}
 
 	if p.Price < 0 {
-		return false, errors.New("price must be greater or equal to zero")
+		return false, errors.New("the price must be greater or equal zero")
 	}
 
 	_, err := govalidator.ValidateStruct(p)
 	if err != nil {
 		return false, err
 	}
-
 	return true, nil
 }
 
@@ -87,7 +86,7 @@ func (p *Product) Enable() error {
 		p.Status = ENABLED
 		return nil
 	}
-	return errors.New("price must be greater than zero to enable de product")
+	return errors.New("the price must be greater than zero to enable the product")
 }
 
 func (p *Product) Disable() error {
@@ -95,7 +94,7 @@ func (p *Product) Disable() error {
 		p.Status = DISABLED
 		return nil
 	}
-	return errors.New("price must be zero in order to have the product disabled")
+	return errors.New("the price must be zero in order to have the product disabled")
 }
 
 func (p *Product) GetID() string {

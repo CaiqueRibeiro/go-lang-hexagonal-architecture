@@ -19,12 +19,7 @@ func setUp() {
 }
 
 func createTable(db *sql.DB) {
-	table := `CREATE TABLE products (
-			"id" string,
-			"name" string,
-			"price" float,
-			"status" string
-			);`
+	table := `CREATE TABLE products ("id" string, "name" string, "price" float, "status" string);`
 	stmt, err := db.Prepare(table)
 	if err != nil {
 		log.Fatal(err.Error())
